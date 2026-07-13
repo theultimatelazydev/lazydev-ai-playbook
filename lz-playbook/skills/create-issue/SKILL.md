@@ -9,7 +9,7 @@ Read optional per-project overrides from `.lz-playbook.json` at the repo root. K
 
 # Create-Issue Skill
 
-This is the **writing** counterpart to the `gh-issue` skill. `gh-issue` reads from `{issueDir}/`; `create-issue` writes to it.
+This is the **writing** counterpart to the `issues` skill. `issues` reads from `{issueDir}/`; `create-issue` writes to it.
 
 ## When to use
 
@@ -216,7 +216,7 @@ Full pattern documented in `{rulesDir}/workflow-rules.md` § Issue body conventi
 
 ## Related
 
-- `gh-issue` skill — reading side.
+- `issues` skill — reading side.
 - `{issueSyncCmd}` — the configured issue-sync tool (gh-issue-sync-compatible interface: pull/push/new/close/status/diff).
 - `{rulesDir}/workflow-rules.md` — clarifies-before-deciding rule.
 - `CLAUDE.md` — project context, constraints, and SSOT rules referenced in **Suggested Implementation Notes**.

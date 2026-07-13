@@ -1,5 +1,5 @@
 ---
-name: gh-issue
+name: issues
 description: Read and edit issues from the local issue mirror instead of calling the tracker CLI. Use whenever you need to list open issues, look up a specific issue, find next steps, or update an existing issue body (decisions, file paths, questions). Avoids token-expensive API calls. Fall back to the tracker CLI only when the folder is absent or the specific issue file is missing.
 ---
 
@@ -7,7 +7,9 @@ description: Read and edit issues from the local issue mirror instead of calling
 
 Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `issueDir` (`.issues`), `issueSyncCmd` (`gh-issue-sync`), `issueTracker` (`github`), `rulesDir` (`.ai/rules`). If the file is absent, use the defaults. Below, `{issueDir}` / `{issueSyncCmd}` / `{issueTracker}` / `{rulesDir}` mean these resolved values.
 
-# GH Issue Skill
+# Issues Skill
+
+**Tracker-neutral.** This skill operates through the configured sync CLI `{issueSyncCmd}` — `gh-issue-sync` when `{issueTracker}` is `github`, `tea-issue-sync` when it's `gitea` (both expose the same `pull`/`push`/`new`/`close`/`status`/`diff` interface). The `gh …` commands shown below are illustrative — use your tracker's equivalent (`tea …` for Gitea).
 
 Issues are mirrored locally in `{issueDir}/` and synced before each session. Always read from — and write to — this folder rather than calling the tracker CLI's list/view/edit commands (e.g. `gh issue list`, `gh issue view`, `gh issue edit`). Issues are **living documents**: append decisions and answers to the body in place; don't rely on comments.
 

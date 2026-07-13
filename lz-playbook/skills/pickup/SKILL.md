@@ -24,7 +24,7 @@ ls -t {handoffDir}/handoff-*.md | head -1
 Read that file.
 
 If no handoff exists, fall back to the priority-ordered list:
-- `ls {issueDir}/open/` for the active backlog (use the `gh-issue` skill to read individual issues).
+- `ls {issueDir}/open/` for the active backlog (use the `issues` skill to read individual issues).
 - `git log --oneline origin/{baseBranch} -10` for recent shipped work.
 - AGENTS.md for the canonical pointers.
 

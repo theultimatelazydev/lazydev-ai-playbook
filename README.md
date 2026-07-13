@@ -29,7 +29,7 @@ lazydev-playbook/                 ← marketplace repo root
 **Skills** (`/lz-playbook:<name>` once installed): `setup` (onboard a project),
 `handoff`, `pickup`, `code-review`, `doc-audit`, `doc-create`, `doc-review`,
 `doc-update`, `feature-planning`, `test-planning`, `architecture-review`,
-`implementation`, `create-issue`, `gh-issue`.
+`implementation`, `create-issue`, `issues`.
 
 **Agent:** `documentation-specialist`.
 
@@ -43,15 +43,15 @@ project's own `.claude/skills/`, so the two coexist.
 ## Configuring per project
 
 Skills that touch project conventions (`handoff`, `pickup`, `create-issue`,
-`gh-issue`, `doc-audit`, `doc-update`, `implementation`) read an optional
+`issues`, `doc-audit`, `doc-update`, `implementation`) read an optional
 `.lz-playbook.json` at the consuming project's repo root. All keys optional; defaults
 match a GitHub + `gh-issue-sync` setup:
 
 | key | default | used by |
 |-----|---------|---------|
-| `issueDir` | `.issues` | create-issue, gh-issue, handoff, pickup, implementation |
-| `issueTracker` | `github` (`github`\|`gitea`) | create-issue, gh-issue |
-| `issueSyncCmd` | `gh-issue-sync` (needs a gh-issue-sync-compatible CLI: pull/push/new/close/status/diff) | create-issue, gh-issue |
+| `issueDir` | `.issues` | create-issue, issues, handoff, pickup, implementation |
+| `issueTracker` | `github` (`github`\|`gitea`) | create-issue, issues |
+| `issueSyncCmd` | `gh-issue-sync` (needs a gh-issue-sync-compatible CLI: pull/push/new/close/status/diff) | create-issue, issues |
 | `handoffDir` | `.ai/handoffs` | handoff, pickup, implementation |
 | `rulesDir` | `.ai/rules` | most skills |
 | `baseBranch` | `main` | handoff, pickup, implementation |

@@ -22,7 +22,7 @@ Run these two steps at the start of every session — before creating a branch o
    ```
    Issues are mirrored locally in `{issueDir}/open/` (synced before sessions). Read individual files for full context: `Read {issueDir}/open/<N>-<slug>.md`. Filter by a label with `grep -l "<label>" {issueDir}/open/*.md`. Only fall back to the tracker's list command (e.g. `gh issue list --state open`) if `{issueDir}/open/` is absent.
 
-   See the `gh-issue` skill for the full usage guide.
+   See the `issues` skill for the full usage guide.
 
 ---
 
@@ -152,7 +152,7 @@ No new logic feature may be merged without at least one test covering its primar
 **Source of truth:** the project's issue tracker (`{issueTracker}`), mirrored locally to `{issueDir}/open/`.
 
 - All open work, bugs, and backlog items live in the tracker, mirrored locally to `{issueDir}/open/`.
-- When listing next steps, read `{issueDir}/open/` (see `gh-issue` skill). Fall back to the tracker's list command only if the folder is absent.
+- When listing next steps, read `{issueDir}/open/` (see `issues` skill). Fall back to the tracker's list command only if the folder is absent.
 - Order by milestone → priority label (P0 → P1 → P2 → P3) → issue number ascending.
 
 ### Issue body conventions
@@ -190,7 +190,7 @@ If the work didn't produce a PR (rare — e.g. a multi-step task where one step 
 
 Provide exactly **5 prioritized next steps** pulled from open issues.
 
-- Read `{issueDir}/open/` (local mirror) instead of calling the tracker's list command. See `gh-issue` skill for usage.
+- Read `{issueDir}/open/` (local mirror) instead of calling the tracker's list command. See `issues` skill for usage.
 - Order by milestone → priority label → issue number ascending.
 - If fewer than 5 open issues exist, fill remaining slots with concrete follow-up tasks from the project's backlog doc.
 - Be specific — name the feature, file path, or command. Avoid vague bullets.

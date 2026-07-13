@@ -59,7 +59,7 @@ This project uses the [lz-playbook](https://github.com/theultimatelazydev/lazyde
 - `{rulesDir}/git-safety-rules.md` — branching model + git autonomy
 - `{rulesDir}/documentation-rules.md` — documentation conventions
 
-Skills: `/lz-playbook:pickup` (start a session), `/lz-playbook:handoff` (end one), plus code/doc/architecture review, feature/test planning, implementation, and issue ops (`create-issue`, `gh-issue`).
+Skills: `/lz-playbook:pickup` (start a session), `/lz-playbook:handoff` (end one), plus code/doc/architecture review, feature/test planning, implementation, and issue ops (`create-issue`, `issues`).
 <!-- lz-playbook:end -->
 ```
 

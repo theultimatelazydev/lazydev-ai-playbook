@@ -13,7 +13,7 @@ Use this skill when adding features, fixing bugs, or making any code change to t
 ## Phase 1 — Orient (before touching any file)
 
 ### 1a. Get the issue
-Prefer the local issue mirror via the `gh-issue` skill (read `{issueDir}/open/<N>-*.md`). If you must hit the tracker directly, use its read-only view command (e.g. `gh issue view <N>` for GitHub, `tea issue <N>` for Gitea). If you can't reach the tracker, check the latest handoff's §5 (Next Steps) — it has context.
+Prefer the local issue mirror via the `issues` skill (read `{issueDir}/open/<N>-*.md`). If you must hit the tracker directly, use its read-only view command (e.g. `gh issue view <N>` for GitHub, `tea issue <N>` for Gitea). If you can't reach the tracker, check the latest handoff's §5 (Next Steps) — it has context.
 
 ### 1b. Check the latest handoff
 Read `{handoffDir}/handoff-YYYY-MM-DD.md` (most recent). It may have exact insertion points, relevant snippets, and decisions already made — skip re-deriving them.
