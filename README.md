@@ -18,7 +18,7 @@ lazydev-playbook/                 ← marketplace repo root
   .lz-playbook.example.json             ← per-project config template
   lz-playbook/                        ← the plugin
     .claude-plugin/plugin.json
-    skills/      13 generic skills (SKILL.md each)
+    skills/      14 generic skills (SKILL.md each)
     agents/      documentation-specialist
     rules/       git-safety, documentation, workflow (reference docs)
   README.md
@@ -26,9 +26,10 @@ lazydev-playbook/                 ← marketplace repo root
 
 ## What's included
 
-**Skills** (`/lz-playbook:<name>` once installed): `handoff`, `pickup`, `code-review`,
-`doc-audit`, `doc-create`, `doc-review`, `doc-update`, `feature-planning`,
-`test-planning`, `architecture-review`, `implementation`, `create-issue`, `gh-issue`.
+**Skills** (`/lz-playbook:<name>` once installed): `setup` (onboard a project),
+`handoff`, `pickup`, `code-review`, `doc-audit`, `doc-create`, `doc-review`,
+`doc-update`, `feature-planning`, `test-planning`, `architecture-review`,
+`implementation`, `create-issue`, `gh-issue`.
 
 **Agent:** `documentation-specialist`.
 
@@ -55,7 +56,10 @@ match a GitHub + `gh-issue-sync` setup:
 | `rulesDir` | `.ai/rules` | most skills |
 | `baseBranch` | `main` | handoff, pickup, implementation |
 
-Copy `.lz-playbook.example.json` → `.lz-playbook.json` and edit. Example for a Gitea +
+The lazy way: run **`/lz-playbook:setup`** once — it detects your tracker, base
+branch, and dirs, writes `.lz-playbook.json`, scaffolds the dirs, copies the rule
+docs, and wires a managed block into `CLAUDE.md`. Or do it by hand: copy
+`.lz-playbook.example.json` → `.lz-playbook.json` and edit. Example for a Gitea +
 `dev`-branch project:
 
 ```json
