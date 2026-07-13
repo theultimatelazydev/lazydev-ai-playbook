@@ -1,0 +1,17 @@
+{
+  "name": "lazydev-playbook",
+  "description": "TheUltimateLazyDev reusable AI dev toolkit — workflow skills + agents for Claude Code, shareable across projects.",
+  "owner": {
+    "name": "TheUltimateLazyDev",
+    "email": "contact@theultimatelazy.dev"
+  },
+  "plugins": [
+    {
+      "name": "lz-playbook",
+      "source": "./lz-playbook",
+      "description": "Reusable AI dev-workflow skills + agents: handoff, pickup, code/doc/architecture review, feature/test planning, implementation, and issue ops.",
+      "category": "productivity",
+      "version": "0.1.0"
+    }
+  ]
+}

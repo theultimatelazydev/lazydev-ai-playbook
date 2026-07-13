@@ -1,0 +1,24 @@
+# --- Claude Code workspace (local, per-machine — never commit) ---
+.claude/settings.local.json
+.claude/worktrees/
+
+# --- Secrets / tokens (resolved at runtime, must never be committed) ---
+.env
+.env.*
+*.local.json
+!.ai-toolkit.example.json
+
+# --- Issue mirror read-caches (source of truth is the tracker) ---
+.issues/
+.issues-tea/
+
+# --- Node / tooling (only if a helper script ever needs deps) ---
+node_modules/
+dist/
+
+# --- OS / editor noise ---
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
