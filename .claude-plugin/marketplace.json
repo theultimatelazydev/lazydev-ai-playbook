@@ -11,7 +11,7 @@
       "source": "./lz-playbook",
       "description": "Reusable AI dev-workflow skills + agents: handoff, pickup, code/doc/architecture review, feature/test planning, implementation, and issue ops.",
       "category": "productivity",
-      "version": "0.1.0"
+      "version": "0.2.0"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "name": "lz-playbook",
   "description": "Reusable AI dev-workflow skills + agents for Claude Code: handoff, pickup, code/doc/architecture review, feature/test planning, implementation, and issue ops.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "TheUltimateLazyDev",
     "email": "contact@theultimatelazy.dev"
