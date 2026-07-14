@@ -45,10 +45,17 @@ Create if missing: `{issueDir}/open`, `{handoffDir}`, `{rulesDir}`. Leave existi
 
 ### 5. Activate the rules
 
-The rule docs ship inside this plugin at `../../rules/` (relative to this skill file): `git-safety-rules.md`, `documentation-rules.md`, `workflow-rules.md`.
+Get the three rule docs (`git-safety-rules.md`, `documentation-rules.md`, `workflow-rules.md`) into `{rulesDir}/`. Use whichever source is reachable in the current environment — **try local first, fall back to the public repo**:
 
-- Copy them into `{rulesDir}/`. If the project already maintains a file of the same name, **ask before overwriting**.
-- Add a **managed block** to `CLAUDE.md` at the repo root, between markers, pointing at them and listing the skills:
+- **Local (desktop Claude Code):** the docs ship beside this skill in the plugin's `rules/` dir (sibling to `skills/`). If that directory is readable, copy from there.
+- **Public repo (sandboxed runtimes — e.g. Cowork):** the plugin is often installed in an app-internal directory the tool sandbox **cannot read**. When the local `rules/` dir isn't readable, fetch each doc from the plugin's public repo instead:
+  - `https://raw.githubusercontent.com/theultimatelazydev/lazydev-ai-playbook/main/lz-playbook/rules/workflow-rules.md`
+  - `https://raw.githubusercontent.com/theultimatelazydev/lazydev-ai-playbook/main/lz-playbook/rules/git-safety-rules.md`
+  - `https://raw.githubusercontent.com/theultimatelazydev/lazydev-ai-playbook/main/lz-playbook/rules/documentation-rules.md`
+- If neither source is reachable (offline + unreadable plugin dir), **skip the copy and say so** — the skills still work without local rule docs; only the `CLAUDE.md` pointer below assumes they exist.
+- If the project already maintains a file of the same name, **ask before overwriting**.
+
+Then add a **managed block** to `CLAUDE.md` at the repo root, between markers, pointing at them and listing the skills:
 
 ```markdown
 <!-- lz-playbook:start -->
