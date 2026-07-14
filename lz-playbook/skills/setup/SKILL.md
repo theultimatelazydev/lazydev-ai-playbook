@@ -54,7 +54,7 @@ The rule docs ship inside this plugin at `../../rules/` (relative to this skill 
 <!-- lz-playbook:start -->
 ## lz-playbook
 
-This project uses the [lz-playbook](https://github.com/theultimatelazydev/lazydev-playbook) plugin. Follow the rule docs in `{rulesDir}`:
+This project uses the [lz-playbook](https://github.com/theultimatelazydev/lazydev-ai-playbook) plugin. Follow the rule docs in `{rulesDir}`:
 - `{rulesDir}/workflow-rules.md` — branch / PR / testing / task-completion protocol
 - `{rulesDir}/git-safety-rules.md` — branching model + git autonomy
 - `{rulesDir}/documentation-rules.md` — documentation conventions
@@ -80,7 +80,7 @@ Offer to add the marketplace + plugin to the project's committed `.claude/settin
 ```json
 {
   "extraKnownMarketplaces": {
-    "lazydev-playbook": { "source": { "source": "github", "repo": "theultimatelazydev/lazydev-playbook" } }
+    "lazydev-playbook": { "source": { "source": "github", "repo": "theultimatelazydev/lazydev-ai-playbook" } }
   },
   "enabledPlugins": { "lz-playbook@lazydev-playbook": true }
 }

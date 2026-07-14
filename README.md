@@ -1,11 +1,11 @@
-# lazydev-playbook
+# lazydev-ai-playbook
 
 A reusable **Claude Code plugin + marketplace** bundling TheUltimateLazyDev's
 generic AI dev-workflow skills and agents, so they can be shared across projects
 instead of copied per-repo. The skills are **config-driven** — they adapt to each
 project via a `.lz-playbook.json` file (see [Configuring per project](#configuring-per-project)).
 
-> **Early-stage.** Home: [github.com/theultimatelazydev/lazydev-playbook](https://github.com/theultimatelazydev/lazydev-playbook).
+> **Early-stage.** Home: [github.com/theultimatelazydev/lazydev-ai-playbook](https://github.com/theultimatelazydev/lazydev-ai-playbook).
 > The generic skills are config-driven, so adopting it in a new project needs no
 > skill changes — just a `.lz-playbook.json`. (See also the companion
 > [tea-issue-sync](https://github.com/theultimatelazydev/tea-issue-sync).)
@@ -13,7 +13,7 @@ project via a `.lz-playbook.json` file (see [Configuring per project](#configuri
 ## Layout
 
 ```
-lazydev-playbook/                 ← marketplace repo root
+lazydev-ai-playbook/              ← marketplace repo root
   .claude-plugin/marketplace.json   ← lists the plugin (source ./lz-playbook)
   .lz-playbook.example.json             ← per-project config template
   lz-playbook/                        ← the plugin
@@ -78,7 +78,7 @@ Add to the project's committed `.claude/settings.json`:
 {
   "extraKnownMarketplaces": {
     "lazydev-playbook": {
-      "source": { "source": "github", "repo": "theultimatelazydev/lazydev-playbook" }
+      "source": { "source": "github", "repo": "theultimatelazydev/lazydev-ai-playbook" }
     }
   },
   "enabledPlugins": {
