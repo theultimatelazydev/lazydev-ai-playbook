@@ -3,6 +3,20 @@
 All notable changes to this project are documented here. This project follows
 [Keep a Changelog](https://keepachangelog.com/) and [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- **`setup` — optional issue-op permission setup.** When the user opts in, `/lz-playbook:setup`
+  offers to allowlist the tracker sync CLI (`{issueSyncCmd}`) so `issues`/`create-issue`/
+  `handoff`/`pickup` stop prompting on every call. The user picks a scope (reads only /
+  reads + local / everything); entries are written to the personal, git-ignored
+  `.claude/settings.local.json` — never the committed team settings.
+
+### Changed
+- `setup` now documents that the sync CLIs are **zero-config** — they infer instance/owner/repo
+  from the git `origin` remote, so setup no longer implies writing a `tea-issue-sync`
+  `config.json` (it stays optional/override-only).
+
 ## [0.2.0]
 
 ### Added
