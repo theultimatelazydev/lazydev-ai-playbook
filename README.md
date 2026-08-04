@@ -102,6 +102,32 @@ Claude Code has **no native always-on "rules"** mechanism (unlike Cursor). The
 them from that project's `CLAUDE.md` (via `rulesDir`), or fold the protocol into
 the relevant skill bodies. (A future `agents/` default-agent could embed them.)
 
+## Troubleshooting
+
+### `tea`: `core.repositoryformatversion does not support extension: worktreeconfig`
+
+`tea` (and other tools built on [go-git](https://github.com/go-git/go-git)) abort with this
+error when run against a repo that uses **git worktrees**. Creating a worktree makes git set
+`extensions.worktreeConfig=true` in the shared config, and go-git rejects that extension
+outright — so `tea pr create`, `tea issue …`, etc. fail from **every** checkout, including the
+primary one (all worktrees share a single `.git`). Bumping `core.repositoryformatversion` to
+`1` does **not** help — go-git rejects the extension at any format version.
+
+`tea-issue-sync` is **not** affected: it shells out to native `git` and the Gitea API, not
+go-git. This only bites the `tea` CLI itself.
+
+Workarounds (pick one):
+
+- **Run `tea` from a separate plain clone** of the repo that has no worktrees. Simplest and safe.
+- **Toggle the extension around the `tea` call** — safe *only* if no per-worktree config is in
+  use (verify: `find "$(git rev-parse --git-common-dir)" -name config.worktree` prints nothing):
+
+  ```bash
+  git config --unset extensions.worktreeconfig
+  tea pr create --login <login> --base main --head <branch> --title "…" --description "…"
+  git config extensions.worktreeconfig true   # restore immediately after
+  ```
+
 ## Roadmap
 
 See [`ROADMAP.md`](./ROADMAP.md).
