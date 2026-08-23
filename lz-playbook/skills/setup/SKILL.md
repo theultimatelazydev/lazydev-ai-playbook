@@ -80,7 +80,7 @@ Verify `{issueSyncCmd}` is on PATH (`command -v {issueSyncCmd}`). If missing, po
 - `gh-issue-sync` → https://github.com/mitsuhiko/gh-issue-sync
 - `tea-issue-sync` → https://github.com/theultimatelazydev/tea-issue-sync
 
-Both sync CLIs are **zero-config** — run inside a repo whose `origin` points at the tracker and they infer the instance / owner / repo from the git remote (auth comes from `gh`/`tea`/`$GITEA_TOKEN`). A config file is **optional, override-only**, so setup does **not** create one. Don't instruct the user to write a `config.json`; only mention it if they need to override an inferred value (e.g. sync from a non-`origin` remote).
+Both sync CLIs are **zero-config** — run inside a repo whose `origin` points at the tracker and they infer the instance / owner / repo from the git remote (auth comes from `gh`/`tea`/`$GITEA_TOKEN`). A config file is **optional, override-only**, so setup does **not** create one. Don't instruct the user to write one; only mention it when they need to override an inferred value — e.g. syncing from a non-`origin` remote, or enabling comment mirroring. For `tea-issue-sync` that file is `.tea-issue-sync.json` (e.g. `{ "output": { "comments": true } }` mirrors each issue's comments into a read-only `<n>-<slug>.comments.md` sidecar — see the `issues` skill).
 
 ### 7. (Optional) Reduce permission prompts for issue ops
 

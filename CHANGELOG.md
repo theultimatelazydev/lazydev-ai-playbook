@@ -14,8 +14,17 @@ All notable changes to this project are documented here. This project follows
 
 ### Changed
 - `setup` now documents that the sync CLIs are **zero-config** — they infer instance/owner/repo
-  from the git `origin` remote, so setup no longer implies writing a `tea-issue-sync`
-  `config.json` (it stays optional/override-only).
+  from the git `origin` remote, so setup no longer implies writing a `tea-issue-sync` config
+  file (it stays optional/override-only).
+- **Comment sidecars are now documented.** `issues` and `workflow-rules` explain that where the
+  sync tool mirrors comments (e.g. `tea-issue-sync` with `output.comments: true`), each issue
+  gets a read-only `<n>-<slug>.comments.md` sidecar worth reading for context — while the issue
+  body stays the durable source of truth. Softened the blanket "don't rely on comments" wording.
+
+### Fixed
+- Corrected the `tea-issue-sync` config filename in `setup` to **`.tea-issue-sync.json`**
+  (upstream renamed it from `config.json`), and cite enabling comment mirroring as the concrete
+  override example.
 
 ## [0.2.0]
 

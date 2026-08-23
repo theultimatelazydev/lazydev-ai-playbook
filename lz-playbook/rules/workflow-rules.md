@@ -157,7 +157,7 @@ No new logic feature may be merged without at least one test covering its primar
 
 ### Issue body conventions
 
-Issues are **living documents**. Edit the body in place rather than relying on comments — the body is the durable single source of truth.
+Issues are **living documents**. Record decisions in the issue **body** — the durable single source of truth — not in comments. (Comments are fine to *read* for context; some sync tools mirror them locally as read-only `.comments.md` sidecars — see the `issues` skill.)
 
 - **At creation, include file paths the implementer will touch.** Spending tokens at creation saves repeated lookups during implementation, e.g. `Files: src/components/Foo`, `Insertion: after the Bar block in src/lib/baz:120`. The `create-issue` skill's **Suggested Implementation Notes** section is where these go; resolve them once at issue-author time so every later reader (human or agent) doesn't re-discover.
 - **Decisions made later** are appended as `**Edit N (YYYY-MM-DD):** <decision>` at the bottom of the body. Use sequential numbers. Don't rewrite earlier text — the trail of decisions matters when an approach gets reconsidered.
