@@ -2,13 +2,7 @@
 
 ## Project config
 
-Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `rulesDir` (`.ai/rules`). If the file is absent, use the default. Below, `{rulesDir}` means this resolved value.
-
-## Suggested Path
-
-```text
-.ai/skills/doc-audit/SKILL.md
-```
+Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `rulesDir` (`.ai/rules`), `baseBranch` (`main`). If the file is absent, use the defaults; if it is **present but missing a key a step needs, stop and ask** rather than assuming a default (see `{rulesDir}/workflow-rules.md` § Config resolution). Never hardcode a path or branch that bypasses these placeholders. Below, `{rulesDir}` / `{baseBranch}` mean these resolved values.
 
 ---
 
@@ -38,17 +32,7 @@ Use this skill:
 
 ## Required Agent
 
-Invoke or behave as:
-
-```text
-Documentation Specialist Agent
-```
-
-Suggested agent path:
-
-```text
-.ai/agents/documentation-specialist.md
-```
+Invoke or behave as the **`documentation-specialist`** agent that ships with this plugin.
 
 ---
 
@@ -58,7 +42,7 @@ Expected inputs may include:
 
 * A specific documentation folder
 * A specific feature or system
-* A GitHub Issue number
+* A tracker issue number
 * A recent implementation summary
 * A handoff file
 * The full repository context
@@ -103,6 +87,8 @@ If implementation status is uncertain:
 * Add an Open Question when human confirmation is needed
 
 Do not guess implementation status.
+
+**Verify against code, not comments.** A doc comment or an older doc is evidence of intent, never current behaviour. For any reader-followable literal a doc states — a path, filename, command, flag, env var, API field, or UI control label — confirm where the code produces it and record that reference. See `{rulesDir}/documentation-rules.md` § Verifying documented literals against code (including the user-facing vs internal calibration).
 
 ---
 
@@ -209,7 +195,7 @@ When creating or significantly rewriting a document, use this structure unless a
 
 ## Related Docs / Issues
 
-- GitHub Issue: #...
+- Issue: #... (project tracker)
 - Related docs:
 ```
 
@@ -217,14 +203,13 @@ When creating or significantly rewriting a document, use this structure unless a
 
 ### 7. Update Documentation Rules
 
-Check and update documentation-related rules when needed.
+Check and update documentation-related rules when needed. Apply rule changes per `{rulesDir}/workflow-rules.md` § Lesson promotion — match the project's existing convention, and carry the evidence for any new rule rather than shipping a bare preference.
 
-Likely files:
+Likely files (whichever the project actually has):
 
 ```text
 {rulesDir}/documentation-rules.md
 {rulesDir}/workflow-rules.md
-{rulesDir}/project-rules.md
 AGENTS.md
 CLAUDE.md
 ```
@@ -296,12 +281,14 @@ Use this format:
 3. Step
 ```
 
+Where any of these sections references **tracker issues** (not doc files), list them per `{rulesDir}/workflow-rules.md` § Work listing format — omitting columns the project can't fill.
+
 ---
 
 ## Constraints
 
-* Do not commit.
-* Do not push.
+* **Deliver as a PR, not an uncommitted working copy.** Doc changes are work: commit them on a feature branch and open a PR per `{rulesDir}/git-safety-rules.md` — *visibility is automatic*; the maintainer reviews the PR, not your working tree. Do **not** commit to `{baseBranch}` directly, and do not merge.
+* Verify reader-followable literals against the code that produces them — see `{rulesDir}/documentation-rules.md` § Verifying documented literals against code.
 * Do not delete documentation without explanation.
 * Do not silently overwrite important decisions.
 * Do not create duplicate docs for the same concept.
@@ -317,7 +304,7 @@ Use this format:
 ```text
 Run the doc-audit skill using the Documentation Specialist agent.
 Review the docs folder and AI rules, add or update Document Status blocks, create missing core metadata docs if needed, and update rules so future implementation changes also update docs.
-Do not commit or push.
+Deliver the changes as a PR (per git-safety-rules) — do not commit to the base branch or merge.
 ```
 
 ---
@@ -336,7 +323,7 @@ Pay special attention to the host project's core domains. For an asset-manager-s
 * Local database/storage
 * UI/UX behavior
 * AI workflow and handoff rules
-* GitHub Issues alignment
+* Issue-tracker alignment
 
 ---
 

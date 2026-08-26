@@ -5,7 +5,7 @@ description: Read and edit issues from the local issue mirror instead of calling
 
 ## Project config
 
-Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `issueDir` (`.issues`), `issueSyncCmd` (`gh-issue-sync`), `issueTracker` (`github`), `rulesDir` (`.ai/rules`). If the file is absent, use the defaults. Below, `{issueDir}` / `{issueSyncCmd}` / `{issueTracker}` / `{rulesDir}` mean these resolved values.
+Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `issueDir` (`.issues`), `issueSyncCmd` (`gh-issue-sync`), `issueTracker` (`github`), `rulesDir` (`.ai/rules`). If the file is absent, use the defaults; if it is **present but missing a key a step needs, stop and ask** rather than assuming a default (see `{rulesDir}/workflow-rules.md` § Config resolution). Never hardcode a path or branch that bypasses these placeholders. Below, `{issueDir}` / `{issueSyncCmd}` / `{issueTracker}` / `{rulesDir}` mean these resolved values.
 
 # Issues Skill
 
@@ -47,7 +47,7 @@ info:
 ```bash
 ls {issueDir}/open/
 ```
-Each filename encodes the issue number and a slug — no need to open files to get the list.
+Each filename encodes the issue number and a slug — no need to open files to get the list. **When you present the list to the user** (not just scan it internally), render it per `{rulesDir}/workflow-rules.md` § Work listing format — a table with `#`, `Title`, and whichever of Category / Weight / Priority / Status the project actually records (omit columns it can't fill; never invent a value).
 
 ### Read a specific issue
 Find the file by number prefix, then read it:
@@ -76,7 +76,7 @@ grep -l "alpha-blocker" {issueDir}/open/*.md
 ```
 
 ### Priority order for next steps
-Sort by: alpha-blocker label first → p0 → p1 → p2 → issue number ascending.
+Order by milestone → priority (highest first, using the **project's own** priority vocabulary) → issue number ascending, per `{rulesDir}/workflow-rules.md` § Task Tracking. Don't assume a specific label scheme — read the project's labels rather than hardcoding one.
 
 ### Edit an existing issue (decisions, answered questions, new file paths)
 

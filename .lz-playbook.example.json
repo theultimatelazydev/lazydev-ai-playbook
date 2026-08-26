@@ -1,9 +1,10 @@
 {
-  "_comment": "Copy to '.lz-playbook.json' at your project root and edit. Consumed by the lz-playbook skills (handoff, pickup, create-issue, gh-issue, doc-*, implementation) so they adapt to each project. All keys optional; the defaults below match a GitHub + gh-issue-sync setup.",
+  "_comment": "Copy to '.lz-playbook.json' at your project root and edit. Consumed by the lz-playbook skills (handoff, pickup, create-issue, issues, doc-*, implementation) so they adapt to each project. All keys optional; the defaults below match a GitHub + gh-issue-sync setup. If the file is present but a key a skill needs is missing, the skill stops and asks rather than silently defaulting.",
   "issueDir": ".issues",
   "issueTracker": "github",
   "issueSyncCmd": "gh-issue-sync",
   "handoffDir": ".ai/handoffs",
   "rulesDir": ".ai/rules",
-  "baseBranch": "main"
+  "baseBranch": "main",
+  "partialMarker": "label"
 }

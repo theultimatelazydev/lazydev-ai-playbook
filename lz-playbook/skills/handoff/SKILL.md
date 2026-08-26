@@ -5,7 +5,7 @@ description: Generates a slim end-of-session Markdown handoff in the project han
 
 ## Project config
 
-Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `handoffDir` (`.ai/handoffs`), `issueDir` (`.issues`), `rulesDir` (`.ai/rules`), `baseBranch` (`main`). If the file is absent, use the defaults. Below, `{handoffDir}` / `{issueDir}` / `{rulesDir}` / `{baseBranch}` mean these resolved values.
+Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `handoffDir` (`.ai/handoffs`), `issueDir` (`.issues`), `rulesDir` (`.ai/rules`), `baseBranch` (`main`). If the file is absent, use the defaults; if it is **present but missing a key a step needs, stop and ask** rather than assuming a default (see `{rulesDir}/workflow-rules.md` § Config resolution). Never hardcode a path or branch that bypasses these placeholders. Below, `{handoffDir}` / `{issueDir}` / `{rulesDir}` / `{baseBranch}` mean these resolved values.
 
 # Handoff
 
@@ -40,7 +40,9 @@ One paragraph. Headline numbers (PRs merged, issues closed, issues filed) + a si
 
 ## 2. New conventions / vocabulary
 
-Anything the next session needs that **isn't already in CLAUDE.md**. Module renames, new event names, new schema entities, conventions adopted, new file locations. One bullet per item, ≤2 lines each. **If a bullet here is stable enough to outlast this session, it should move to CLAUDE.md instead** — call that out and propose the edit.
+Anything the next session needs that **isn't already in the always-loaded rules** (CLAUDE.md and `{rulesDir}`). Module renames, new event names, new schema entities, conventions adopted, new file locations. One bullet per item, ≤2 lines each.
+
+**A bullet stable enough to outlast this session is promoted — applied, not proposed — in this same PR.** Follow `{rulesDir}/workflow-rules.md` § Lesson promotion: write it into the durable home the project already uses (detect its convention; ask if ambiguous), make it earn its slot if that file is dense, and carry its evidence (the incident + what it cost). Record the landing in §7 below.
 
 If the session didn't introduce new vocabulary, omit this section.
 
@@ -48,7 +50,7 @@ If the session didn't introduce new vocabulary, omit this section.
 
 - **Works:** brief list, pointer to PRs is fine. Don't restate features that were already working.
 - **Incomplete / known follow-ups:** what's deferred, with `path:line` or `path::function` so the next agent knows where the gap is. Be honest — call out skipped scope from agent PRs.
-- **Open issues backlog:** filter `{issueDir}/open/` to alpha-blocker / alpha / next-priority. Short list (#N + title + tag).
+- **Open issues backlog:** the top open issues by priority, rendered per `{rulesDir}/workflow-rules.md` § Work listing format (omit columns the project can't fill).
 
 ## 4. Open questions
 
@@ -67,6 +69,16 @@ Each option must name files, line ranges or function names, and what to change �
 ## 6. Suggested first action
 
 After /pickup, do X. One sentence + the exact command if relevant.
+
+## 7. Promotions
+
+Lessons promoted to their durable home **in this PR** (per `{rulesDir}/workflow-rules.md` § Lesson promotion). This is the row set the next `/pickup` verifies actually landed. Omit the section only if nothing was promoted or rejected this session.
+
+| Lesson (one line) | Promoted to | Evidence (incident → cost) | State |
+|---|---|---|---|
+| … | `{rulesDir}/…` § … (or CLAUDE.md) | … | Landed |
+
+Record any promotion the maintainer **rejected** here too, as `State: Rejected — <reason>`, so it is not re-proposed.
 ```
 
 ### 3. Update AGENTS.md
@@ -99,6 +111,7 @@ Before finishing, verify:
 - [ ] §5 next-step options name files + functions + line ranges, with conflict map for parallel options.
 - [ ] §4 contains real blockers, not nice-to-knows.
 - [ ] AGENTS.md latest-handoff pointer updated.
+- [ ] Any lesson worth outlasting the session is **applied** in this PR and recorded in §7 (landed or rejected) — not left as a proposal.
 - [ ] Handoff is on a new branch + PR to `{baseBranch}` — not left uncommitted in the working copy.
 
 ## Verbose form (rare)

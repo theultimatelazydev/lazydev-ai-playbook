@@ -2,7 +2,7 @@
 
 ## Project config
 
-Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `issueDir` (`.issues`), `issueSyncCmd` (`gh-issue-sync`), `handoffDir` (`.ai/handoffs`), `rulesDir` (`.ai/rules`), `baseBranch` (`main`). If the file is absent, use the defaults. Below, `{issueDir}` / `{issueSyncCmd}` / `{handoffDir}` / `{rulesDir}` / `{baseBranch}` mean these resolved values.
+Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `issueDir` (`.issues`), `issueSyncCmd` (`gh-issue-sync`), `handoffDir` (`.ai/handoffs`), `rulesDir` (`.ai/rules`), `baseBranch` (`main`). If the file is absent, use the defaults; if it is **present but missing a key a step needs, stop and ask** rather than assuming a default (see `{rulesDir}/workflow-rules.md` § Config resolution). Never hardcode a path or branch that bypasses these placeholders. Below, `{issueDir}` / `{issueSyncCmd}` / `{handoffDir}` / `{rulesDir}` / `{baseBranch}` mean these resolved values.
 
 Use this skill when adding features, fixing bugs, or making any code change to the repo.
 
@@ -82,6 +82,8 @@ Run the project's own test and build/typecheck commands (find them in `CLAUDE.md
 
 If these commands are not available in the current environment, note it explicitly so the maintainer knows to run them locally before merging.
 
+**Verifying against acceptance criteria.** A criterion that describes something a **person** does is met only when a person — or a test driving the real interface — has done it; "verified by unit tests" does not mark a user-facing criterion met. Verify each criterion in the **environment where it can fail** (platform, filesystem, hardware, config) — a pass in the convenient environment proves nothing about the one the bug lives in, and "verified" without naming the environment is not verification. See `{rulesDir}/workflow-rules.md` § Marking unmet acceptance criteria.
+
 ---
 
 ## Phase 5 — Commit & PR
@@ -91,6 +93,7 @@ Follow `{rulesDir}/workflow-rules.md` exactly:
 - `git add <only the files you changed>`
 - Commit with conventional format
 - Push and open PR (`--base {baseBranch}`) with `Closes #N` in body
+- In the PR body, list the issue's **acceptance criteria, each marked met or unmet**. If any is unmet, mark the PR **partial** so it is visible while scanning the PR *list* — per `{rulesDir}/workflow-rules.md` § Marking unmet acceptance criteria (default: the `partial` label; configurable via `{partialMarker}`; **never** a title prefix).
 
 ---
 
@@ -99,5 +102,6 @@ Follow `{rulesDir}/workflow-rules.md` exactly:
 - Follow existing architecture — put new code where its siblings live, not wherever is convenient.
 - Match the surrounding code's idioms, naming, and comment density.
 - Respect the consuming project's own hard constraints — read its `CLAUDE.md` / `AGENTS.md` for required wrappers, forbidden imports, fixed API contracts, and similar rules before editing.
-- Update docs (changelog, relevant `docs/` files) when behaviour or public APIs change.
-- Mark open questions as TBD rather than silently deciding.
+- Update docs when behaviour or public APIs change, and verify any reader-followable literal against the code that produces it — see `{rulesDir}/documentation-rules.md` § Verifying documented literals against code.
+- Clarify open questions rather than silently deciding — see `{rulesDir}/workflow-rules.md` § Scope belongs to the maintainer (mark genuinely unresolved items TBD).
+- When you present a list of issues or next-steps to the user, render it per `{rulesDir}/workflow-rules.md` § Work listing format — a table, omitting columns the project can't fill.
