@@ -19,6 +19,7 @@ Onboards the current repository to the lz-playbook plugin: after this runs, the 
 | `handoffDir` | `.ai/handoffs` | session handoff docs |
 | `rulesDir` | `.ai/rules` | where the rule docs live |
 | `baseBranch` | `main` | integration / PR-target branch |
+| `partialMarker` | `label` | how a PR with unmet acceptance criteria is flagged in the PR *list*: `label` (a `partial` label) \| `suffix` (`… [partial]` title suffix) \| `checklist` (body only). Never a title prefix. |
 
 ## Steps
 

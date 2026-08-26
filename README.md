@@ -43,9 +43,11 @@ project's own `.claude/skills/`, so the two coexist.
 ## Configuring per project
 
 Skills that touch project conventions (`handoff`, `pickup`, `create-issue`,
-`issues`, `doc-audit`, `doc-update`, `implementation`) read an optional
+`issues`, `doc-audit`, `doc-update`, `doc-create`, `implementation`) read an optional
 `.lz-playbook.json` at the consuming project's repo root. All keys optional; defaults
-match a GitHub + `gh-issue-sync` setup:
+match a GitHub + `gh-issue-sync` setup. If the file is **absent**, defaults apply; if it is
+**present but missing a key a skill needs**, the skill stops and asks rather than silently
+defaulting (see `workflow-rules.md` § Config resolution):
 
 | key | default | used by |
 |-----|---------|---------|
@@ -55,6 +57,7 @@ match a GitHub + `gh-issue-sync` setup:
 | `handoffDir` | `.ai/handoffs` | handoff, pickup, implementation |
 | `rulesDir` | `.ai/rules` | most skills |
 | `baseBranch` | `main` | handoff, pickup, implementation |
+| `partialMarker` | `label` (`label`\|`suffix`\|`checklist`) | implementation — how unmet acceptance criteria are flagged in the PR list |
 
 The lazy way: run **`/lz-playbook:setup`** once — it detects your tracker, base
 branch, and dirs, writes `.lz-playbook.json`, scaffolds the dirs, copies the rule
@@ -66,9 +69,8 @@ docs, and wires a managed block into `CLAUDE.md`. Or do it by hand: copy
 { "issueDir": ".issues-tea", "issueTracker": "gitea", "issueSyncCmd": "tea-issue-sync", "baseBranch": "dev" }
 ```
 
-> The other 6 skills (`code-review`, `doc-create`, `doc-review`,
-> `feature-planning`, `test-planning`, `architecture-review`) are tool/convention
-> agnostic and need no config.
+> The other 5 skills (`code-review`, `doc-review`, `feature-planning`,
+> `test-planning`, `architecture-review`) are tool/convention agnostic and need no config.
 
 ## Installing in a project
 
@@ -90,6 +92,8 @@ Add to the project's committed `.claude/settings.json`:
 Or interactively: `claude plugin marketplace add <git-url>` → `claude plugin install lz-playbook@lazydev-playbook`.
 
 **Version pinning:** bump `version` in `lz-playbook/.claude-plugin/plugin.json`; projects only update when that changes (omit version → tracks the branch SHA, i.e. every commit).
+
+**Updating an existing project:** after a plugin version bump, **re-run `/lz-playbook:setup`** — it refreshes the copied rule docs in your `rulesDir` and the managed `CLAUDE.md` block so the project picks up new conventions. `v0.3.0` changed the templates and rule docs substantially (scope ownership + `Definition of done`, applied lesson-promotion, the git visibility/destruction split, the work-listing table, and code-verified documentation); a project still running the old copies should re-run setup. See [`CHANGELOG.md`](./CHANGELOG.md).
 
 **Reachability:** the marketplace git source must be reachable when Claude loads
 it. A public remote (e.g. GitHub) resolves everywhere; a private or VPN-only host

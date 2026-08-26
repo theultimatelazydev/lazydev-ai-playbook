@@ -5,7 +5,7 @@ description: Scaffold one or more new issues in the local issue mirror using the
 
 ## Project config
 
-Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `issueDir` (`.issues`), `issueSyncCmd` (`gh-issue-sync`), `issueTracker` (`github`), `rulesDir` (`.ai/rules`). If the file is absent, use the defaults. Below, `{issueDir}` / `{issueSyncCmd}` / `{issueTracker}` / `{rulesDir}` mean these resolved values.
+Read optional per-project overrides from `.lz-playbook.json` at the repo root. Keys (defaults): `issueDir` (`.issues`), `issueSyncCmd` (`gh-issue-sync`), `issueTracker` (`github`), `rulesDir` (`.ai/rules`). If the file is absent, use the defaults; if it is **present but missing a key a step needs, stop and ask** rather than assuming a default (see `{rulesDir}/workflow-rules.md` § Config resolution). Never hardcode a path or branch that bypasses these placeholders. Below, `{issueDir}` / `{issueSyncCmd}` / `{issueTracker}` / `{rulesDir}` mean these resolved values.
 
 # Create-Issue Skill
 
@@ -46,6 +46,8 @@ The only legal labels are those in `{issueDir}/.sync/labels.json`. Read that fil
 cat {issueDir}/.sync/labels.json
 ```
 
+> **The label/phase/priority names shown throughout this skill (`[Alpha]`, `alpha-blocker`, `p0`–`p5`, …) are one project's scheme, used illustratively.** Your project's real vocabulary is whatever `{issueDir}/.sync/labels.json` and the existing files in `{issueDir}/` define — mirror that, not these examples. A project with different phases or priority labels uses its own.
+
 Priority defaults if the user does not specify:
 
 | Phase | Default priority |
@@ -73,7 +75,7 @@ Always surface duplicates to the user before silently creating something new.
 
 ### Step 3 — Push back on under-specified requests
 
-Per `{rulesDir}/workflow-rules.md`, "mark open questions as TBD rather than silently deciding." If a bullet is too vague to scope (no clear acceptance criteria, no obvious user-visible outcome), pause and clarify with the user instead of inventing scope. Examples that need clarification:
+Per `{rulesDir}/workflow-rules.md` § Scope belongs to the maintainer, an under-specified requirement is a question to raise, not scope to invent. If a bullet is too vague to scope (no clear acceptance criteria, no obvious **Definition of done**), pause and clarify with the user instead of inventing scope. Examples that need clarification:
 
 - "Make tagging better" — what specifically is wrong?
 - "Improve the UI" — which screen, what behavior?
@@ -119,9 +121,9 @@ As a <role>, I want <capability>, so that <outcome>.
 
 (Bug-style issues only.) What happens today, with a concrete example if helpful.
 
-## Expected Behavior
+## Definition of done
 
-What should happen instead.
+**Mandatory.** The user-visible outcome in one or two sentences — what a person can do when this is finished that they cannot do now. This is what stops a slice from wearing the whole feature's name. (For a bug, it is the corrected behaviour a person can then rely on.)
 
 ## Scope
 
@@ -129,7 +131,14 @@ What should happen instead.
 - Bullet list.
 
 ### Out of Scope
-- Bullet list — explicit non-goals matter as much as goals.
+
+**This section belongs to the maintainer — scope is not the agent's to reduce.** Record a non-goal here **only** when you can point at one of three permitted kinds (see `{rulesDir}/workflow-rules.md` § Scope belongs to the maintainer):
+
+1. a **different feature, named** — ideally with the issue that owns it;
+2. a **decided constraint, with its decision referenced** (design record, prior ruling, issue) — among the most valuable lines in the issue; keep them;
+3. an **exclusion the maintainer stated** — in the request, or in a plan/epic that already named the cut.
+
+Anything else is **a question, not an exclusion** → put it under `## Questions` and raise it in conversation before filing. Never write a deferral here and proceed.
 
 ## Acceptance Criteria
 
