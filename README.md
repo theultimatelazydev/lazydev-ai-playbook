@@ -29,7 +29,8 @@ lazydev-ai-playbook/              ← marketplace repo root
 **Skills** (`/lz-playbook:<name>` once installed): `setup` (onboard a project),
 `handoff`, `pickup`, `code-review`, `doc-audit`, `doc-create`, `doc-review`,
 `doc-update`, `feature-planning`, `test-planning`, `architecture-review`,
-`implementation`, `create-issue`, `issues`.
+`implementation`, `create-issue`, `issues`, `document` (project docs written into a
+Noltez workspace, in the house style of [`skills/document/style-guide.md`](lz-playbook/skills/document/style-guide.md)).
 
 **Agent:** `documentation-specialist`.
 

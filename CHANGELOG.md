@@ -3,6 +3,21 @@
 All notable changes to this project are documented here. This project follows
 [Keep a Changelog](https://keepachangelog.com/) and [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- **`document` — a house style for user documentation** (`skills/document/style-guide.md`). How a
+  product wiki is shaped and written: site order, page anatomy (summary line → definition with real
+  examples → Overview → Metadata → tasks → Limitations → Next steps), the four-column Metadata
+  table, one job per callout kind, screenshot placeholders that start with `Screenshot:` so search
+  finds them, collapsed questions as toggle lists, troubleshooting/FAQ/glossary patterns, voice
+  rules and a pre-publish checklist. Includes a MkDocs Material → Noltez mapping for migrating an
+  existing site. Mirrored as a Noltez page keyed `repo:lazydev-ai-toolkit/docs#docs-style-guide`.
+
+### Changed
+- **`document` speaks Noltez.** note-app was renamed; the skill now names `mcp__noltez__*` tools.
+  Existing `repo:note-app/…` keys are left alone — a key is identity.
+
 ## [0.3.0]
 
 Templates and rule docs overhauled from cross-project usage — seven interacting defects where the

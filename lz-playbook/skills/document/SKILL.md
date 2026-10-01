@@ -1,19 +1,21 @@
 ---
 name: document
-description: Write and maintain a project's documentation INSIDE a running note-app workspace, through the noteapp MCP tools — create the doc tree, keep it updated on re-runs (keyed upserts, never duplicates), restructure and retire pages, and propose databases behind a confirm-first flow. Use when the user says "document this project in note-app", "update the docs in the app", "move these docs into note-app", or wants project documentation to live in the app instead of flat Markdown files.
+description: Write and maintain a project's documentation INSIDE a running Noltez workspace, through the noltez MCP tools — create the doc tree, keep it updated on re-runs (keyed upserts, never duplicates), restructure and retire pages, and propose databases behind a confirm-first flow. Use when the user says "document this project in Noltez", "update the docs in the app", "move these docs into Noltez", or wants project documentation to live in the app instead of flat Markdown files.
 ---
 
-# Document — project docs that live in note-app
+# Document — project docs that live in Noltez
+
+> Noltez was called note-app until 2026-08; older docs and keys (`repo:note-app/…`) still use that name. Keys are identity — never rewrite an existing one to match the new name.
 
 ## What this is
 
-The playbook's skills write docs to files. This one writes them **into a running note-app workspace**, through the `noteapp` MCP tools — so the docs live where the user reads and edits them, and a re-run **updates** what it wrote instead of duplicating it.
+The playbook's skills write docs to files. This one writes them **into a running Noltez workspace**, through the `noltez` MCP tools — so the docs live where the user reads and edits them, and a re-run **updates** what it wrote instead of duplicating it.
 
 ⚠️ **The app must be OPEN.** Reads are answered by the running app and writes are applied by it (the app holds the key; the MCP process never does). Every tool says this in its own words when the app is closed — relay that, never retry silently.
 
 ## Preconditions — check, and say plainly when they fail
 
-1. **The tools exist**: `mcp__noteapp__list_spaces` (and, for writing, `create_page`). Absent tools mean the server was registered without `--allow-write`, or not registered at all — the owner fixes both from note-app's **Settings → MCP server** (it generates the exact command). A server registered mid-session needs a fresh session.
+1. **The tools exist**: `mcp__noltez__list_spaces` (and, for writing, `create_page`). Absent tools mean the server was registered without `--allow-write`, or not registered at all — the owner fixes both from Noltez's **Settings → MCP server** (it generates the exact command). A server registered mid-session needs a fresh session.
 2. **Something is shared**: `list_spaces` returning *"Nothing in this workspace has been shared with assistants yet"* means the owner has not granted access. Writing needs **Can edit** reaching the destination space. Report it; do not work around it.
 3. Every refusal from these tools is written to be relayed — do that instead of paraphrasing.
 
@@ -36,6 +38,14 @@ Every page this skill creates carries an **`external_key`**: `repo:<repo-name>/d
 - **Subpages by topic**, not by source file: Overview / Architecture / Guides / Status are a good default; follow the project's own structure when it has one. Markdown becomes real blocks — headings, lists, `- [ ]` checklists, tables, quotes, fenced code.
 - **Curate, don't dump.** A page a person will read beats a mirror of the repo. Link to the repo for exhaustive references.
 
+### 2b. Write it in the house style
+
+User-facing documentation — the product wiki a person reads to learn the app — follows [`style-guide.md`](./style-guide.md), next to this file. Read it before authoring any page: page anatomy (summary line → definition with real examples → Overview → Metadata → tasks → Limitations → Next steps), the four-column Metadata table, one job per callout kind, screenshot placeholders, collapsed questions as toggle lists, and the voice rules. It also maps MkDocs Material syntax onto Noltez blocks, for migrating an existing site.
+
+Engineering docs (architecture, decisions, status) are not bound by the page anatomy, but the voice and callout rules still apply.
+
+The guide is mirrored as a Noltez page under the key `repo:lazydev-ai-toolkit/docs#docs-style-guide`. When `style-guide.md` changes, re-upsert that page with the file's body (everything below the H1) — the file is the source of truth, the page is its readable copy.
+
 ### 3. Keep it true on re-runs
 
 - Changed source → `create_page` with the same `external_key` (upsert) or `append_to_page` for additions.
@@ -53,10 +63,10 @@ End with: the tree you wrote (titles + keys), what a re-run will update, and any
 
 ## Worked example
 
-note-app's own workspace: a `Note App Docs` tree (root + Overview / Architecture / Working with agents / Status & Roadmap, keys `repo:note-app/docs#…`) authored and maintained this way, plus a `Note App Tracker` database created through the confirm flow with issue rows keyed `gitea:note-app#<n>` — re-runs update both in place.
+Noltez's own workspace: a `Note App Docs` tree (root + Overview / Architecture / Working with agents / Status & Roadmap, keys `repo:note-app/docs#…`) authored and maintained this way, plus a `Note App Tracker` database created through the confirm flow with issue rows keyed `gitea:note-app#<n>` — re-runs update both in place.
 
 ## Boundaries
 
-- **This is the supported agent surface** (note-app #549/#518) — not `agent-write.mjs`, not the CRDT log, not a future HTTP API.
+- **This is the supported agent surface** (Noltez #549/#518) — not `agent-write.mjs`, not the CRDT log, not a future HTTP API.
 - No hard deletion, no schema edits beyond what the tools offer (`delete_option` exists; add/rename/retype are the owner's, in the app).
 - When a workspace is unreachable, say so and stop — never fall back to writing files and calling it done.
