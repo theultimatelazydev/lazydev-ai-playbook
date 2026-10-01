@@ -183,4 +183,4 @@ One entry per term the UI uses, **spelled exactly as the UI spells it**, each wi
 
 ---
 
-*Source of truth: `lz-playbook/skills/document/style-guide.md` in the lazydev-ai-toolkit repo. Edit there; this page is re-synced by the `document` skill under the key `repo:lazydev-ai-toolkit/docs#docs-style-guide`.*
+Source of truth: `lz-playbook/skills/document/style-guide.md` in the lazydev-ai-playbook repo. Edit there; this page is re-synced by the `document` skill under the key `repo:lazydev-ai-toolkit/docs#docs-style-guide`.
